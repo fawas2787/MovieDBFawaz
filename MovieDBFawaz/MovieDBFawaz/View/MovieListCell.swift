@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MovieListCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
+class MovieListCell: UITableViewCell {
 
     // Property -- Outlets
     @IBOutlet weak var movieNameLabel: UILabel!
@@ -21,19 +21,21 @@ class MovieListCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate
         // Initialization code
     }
     
-    // *** --- TableView Delegates --- *** \\
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return 10
+    var movie: Movie?{
+        didSet
+        {
+            self.updateUI()
+        }
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // tableViewCell Initialization
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MovieListCell", for: indexPath) as! MovieListCell
-        
-        return cell
+    private  func updateUI(){
+        guard let movie = movie, let url = URL(string: "http://image.tmdb.org/t/p/w92\(movie.posterPath)")  else { return }
+       //  let resource = ImageResource(downloadURL: url, cacheKey: movie.title)
+     //   moviePosterImg.kf.setImage(with: resource, placeholder: #imageLiteral(resourceName: "placer"), options: [.transition(.fade(0.3))])
+        movieNameLabel.text = movie.title
+      //  ratingView.value = CGFloat(ceil(movie.rating/2))
+      //  dateLabel.text = DF.format(date: movie.releaseDate)
     }
-    
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
