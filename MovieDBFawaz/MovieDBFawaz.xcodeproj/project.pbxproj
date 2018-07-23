@@ -20,6 +20,8 @@
 		03D9073D2105C79000B4AB68 /* MovieListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D9073C2105C79000B4AB68 /* MovieListCell.swift */; };
 		03D9073F2105CCC300B4AB68 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D9073E2105CCC300B4AB68 /* API.swift */; };
 		03D907412105CD1400B4AB68 /* MovieAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D907402105CD1400B4AB68 /* MovieAPI.swift */; };
+		03D907442105F98800B4AB68 /* MockApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D907432105F98800B4AB68 /* MockApi.swift */; };
+		03D907472105FA1200B4AB68 /* Movies.json in Resources */ = {isa = PBXBuildFile; fileRef = 03D907462105FA1200B4AB68 /* Movies.json */; };
 		2763E0D79F1A7CB65E1B46D4 /* Pods_MovieDBFawazUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B889BEE2339CB6C50AD9B40 /* Pods_MovieDBFawazUITests.framework */; };
 		EBAD9A667EC8C75055F8F8D9 /* Pods_MovieDBFawaz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0F01DF8B895E5BF777BECDD /* Pods_MovieDBFawaz.framework */; };
 		F9867E90055E762C7DF2F589 /* Pods_MovieDBFawazTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D670EA192DD8BBFE06FE96F7 /* Pods_MovieDBFawazTests.framework */; };
@@ -62,6 +64,8 @@
 		03D9073C2105C79000B4AB68 /* MovieListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListCell.swift; sourceTree = "<group>"; };
 		03D9073E2105CCC300B4AB68 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		03D907402105CD1400B4AB68 /* MovieAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieAPI.swift; sourceTree = "<group>"; };
+		03D907432105F98800B4AB68 /* MockApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockApi.swift; sourceTree = "<group>"; };
+		03D907462105FA1200B4AB68 /* Movies.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Movies.json; sourceTree = "<group>"; };
 		1B889BEE2339CB6C50AD9B40 /* Pods_MovieDBFawazUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieDBFawazUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2360328A6687528E1CB46796 /* Pods-MovieDBFawaz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieDBFawaz.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MovieDBFawaz/Pods-MovieDBFawaz.debug.xcconfig"; sourceTree = "<group>"; };
 		3D33F5DF07A05058A0442933 /* Pods-MovieDBFawazUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieDBFawazUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MovieDBFawazUITests/Pods-MovieDBFawazUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -194,8 +198,10 @@
 		03ACF9AE2104D0A600E4FCAE /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				03D907452105F9D100B4AB68 /* Stubs */,
 				03D9073E2105CCC300B4AB68 /* API.swift */,
 				03D907402105CD1400B4AB68 /* MovieAPI.swift */,
+				03D907432105F98800B4AB68 /* MockApi.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -222,6 +228,14 @@
 				03ACF9B22104D1D500E4FCAE /* Movie.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		03D907452105F9D100B4AB68 /* Stubs */ = {
+			isa = PBXGroup;
+			children = (
+				03D907462105FA1200B4AB68 /* Movies.json */,
+			);
+			path = Stubs;
 			sourceTree = "<group>";
 		};
 		11AA6EFF275BBE9071E3DE71 /* Frameworks */ = {
@@ -357,6 +371,7 @@
 			files = (
 				038833B22104A0A90026CD61 /* LaunchScreen.storyboard in Resources */,
 				03D907392105BB8300B4AB68 /* Default-568h@2x.png in Resources */,
+				03D907472105FA1200B4AB68 /* Movies.json in Resources */,
 				038833AF2104A0A90026CD61 /* Assets.xcassets in Resources */,
 				038833AA2104A0550026CD61 /* Main.storyboard in Resources */,
 			);
@@ -441,11 +456,15 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-MovieDBFawaz/Pods-MovieDBFawaz-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
+				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -464,6 +483,7 @@
 				03D907412105CD1400B4AB68 /* MovieAPI.swift in Sources */,
 				038833AD2104A05D0026CD61 /* MovieDBFawaz.xcdatamodeld in Sources */,
 				03D9073B2105BED300B4AB68 /* MovieListVC.swift in Sources */,
+				03D907442105F98800B4AB68 /* MockApi.swift in Sources */,
 				03ACF9B32104D1D500E4FCAE /* Movie.swift in Sources */,
 				03D9073F2105CCC300B4AB68 /* API.swift in Sources */,
 				038833A52104A04F0026CD61 /* AppDelegate.swift in Sources */,
@@ -642,7 +662,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RWBDE25HP7;
-				INFOPLIST_FILE = MovieDBFawaz/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/MovieDBFawaz/Supporting Files/Info.plist";
+				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -661,7 +682,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RWBDE25HP7;
-				INFOPLIST_FILE = MovieDBFawaz/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/MovieDBFawaz/Supporting Files/Info.plist";
+				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

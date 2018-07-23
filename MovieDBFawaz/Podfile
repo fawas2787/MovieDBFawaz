@@ -8,6 +8,7 @@ target 'MovieDBFawaz' do
   # Pods for MovieDBFawaz
   pod 'SwiftyJSON', '~> 4.0'
   pod 'Alamofire'
+  pod 'Moya', '~> 11.0'
 
   target 'MovieDBFawazTests' do
     inherit! :search_paths

@@ -7,12 +7,15 @@
 //
 
 import UIKit
-
+import Moya
 class MovieListVC: UIViewController {
 
     // *** -- Property Outlets -- *** \\
     
     @IBOutlet weak var tableView: UITableView!
+    
+    var nowPlayingMovies: [Movie]!
+    var suggestedMovies: [Movie]!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -25,14 +28,15 @@ class MovieListVC: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+  // Access the getNewMMovies
+    
+    func getMovies()
+    {
+        API.getNewMovies(page: 1, completion: {movies in
+            self.nowPlayingMovies = movies
+            print("New Movies: \(self.nowPlayingMovies)")
+            self.tableView.reloadData()
+        })
     }
-    */
 
 }
