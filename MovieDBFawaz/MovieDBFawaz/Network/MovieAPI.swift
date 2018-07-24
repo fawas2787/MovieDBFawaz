@@ -69,8 +69,11 @@ extension MovieApi: TargetType
     // Finally request task
     var task: Task {
         switch self {
-        case .suggestedMovies, .newMovies:
+        case .suggestedMovies:
             return .requestPlain
+            
+        case .newMovies(let page):
+            return .requestParameters(parameters:  ["page":page, "api_key":API.apiKey], encoding: URLEncoding.queryString)
         }
     }
     

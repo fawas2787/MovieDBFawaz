@@ -48,15 +48,15 @@
                                                     <color key="textColor" red="0.75651716321243523" green="0.75651716321243523" blue="0.75651716321243523" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="OverView" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="8vu-48-dki">
-                                                    <rect key="frame" x="130" y="63" width="230" height="73"/>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="OverView" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="8vu-48-dki">
+                                                    <rect key="frame" x="130" y="63" width="230" height="70"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="8vu-48-dki" secondAttribute="bottom" constant="10.5" id="27t-2V-4EE"/>
+                                                <constraint firstAttribute="bottom" secondItem="8vu-48-dki" secondAttribute="bottom" constant="13.5" id="27t-2V-4EE"/>
                                                 <constraint firstAttribute="trailing" secondItem="65z-bl-ytW" secondAttribute="trailing" constant="15" id="CaQ-Zr-hst"/>
                                                 <constraint firstAttribute="bottom" secondItem="Zyz-xS-Vf4" secondAttribute="bottom" constant="13.5" id="CzC-3v-Xlc"/>
                                                 <constraint firstItem="Zyz-xS-Vf4" firstAttribute="top" secondItem="A8I-5k-dJz" secondAttribute="top" constant="13" id="F4W-V0-8u9"/>

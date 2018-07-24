@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class MovieListCell: UITableViewCell {
 
@@ -21,21 +22,21 @@ class MovieListCell: UITableViewCell {
         // Initialization code
     }
     
-    var movie: Movie?{
-        didSet
-        {
+    var movie: Movie? {
+        didSet {
             self.updateUI()
         }
     }
     
     private  func updateUI(){
-        guard let movie = movie, let url = URL(string: "http://image.tmdb.org/t/p/w92\(movie.posterPath)")  else { return }
-       //  let resource = ImageResource(downloadURL: url, cacheKey: movie.title)
-     //   moviePosterImg.kf.setImage(with: resource, placeholder: #imageLiteral(resourceName: "placer"), options: [.transition(.fade(0.3))])
+        guard let movie = movie, let url = URL(string: "https://image.tmdb.org/t/p/w92\(movie.posterPath)")  else { return }
+        let resource = ImageResource(downloadURL: url, cacheKey: movie.title)
+        moviePosterImg.kf.setImage(with: resource, placeholder: #imageLiteral(resourceName: "placeholder"), options: [.transition(.fade(0.3))])
         movieNameLabel.text = movie.title
-      //  ratingView.value = CGFloat(ceil(movie.rating/2))
-      //  dateLabel.text = DF.format(date: movie.releaseDate)
+     
+     //   dateLabel.text = DF.format(date: movie.releaseDate)
     }
+   
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

@@ -8,7 +8,8 @@
 
 import UIKit
 import Moya
-class MovieListVC: UIViewController {
+import Kingfisher
+class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     // *** -- Property Outlets -- *** \\
     
@@ -16,9 +17,11 @@ class MovieListVC: UIViewController {
     
     var nowPlayingMovies: [Movie]!
     var suggestedMovies: [Movie]!
+    var movie: Movie?
+    var url:String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.getMovies()
         // Do any additional setup after loading the view.
     }
 
@@ -38,5 +41,28 @@ class MovieListVC: UIViewController {
             self.tableView.reloadData()
         })
     }
+    
+    // *** -- TableView Delegate -- *** \\
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if nowPlayingMovies == nil {
+            return 0
+        }
+        return nowPlayingMovies.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MovieListCell", for: indexPath) as! MovieListCell
+       // let newMovies = nowPlayingMovies![indexPath.row]
+        cell.movie = nowPlayingMovies![indexPath.row]
+     
+        return cell
+    }
+    
+    // set custom hieght to the Movie List Cell
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    {
+        return 147.0;//Choose your custom row height
+    }
+    
 
 }
