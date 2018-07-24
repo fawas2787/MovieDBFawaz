@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0309038121071AC8001FEAAE /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0309038021071AC8001FEAAE /* DateFormatter.swift */; };
+		0309038321074630001FEAAE /* MovieDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0309038221074630001FEAAE /* MovieDetailVC.swift */; };
 		038833A52104A04F0026CD61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038833A42104A04F0026CD61 /* AppDelegate.swift */; };
 		038833AA2104A0550026CD61 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 038833A82104A0550026CD61 /* Main.storyboard */; };
 		038833AD2104A05D0026CD61 /* MovieDBFawaz.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 038833AB2104A05B0026CD61 /* MovieDBFawaz.xcdatamodeld */; };
@@ -45,6 +47,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0309038021071AC8001FEAAE /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
+		0309038221074630001FEAAE /* MovieDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailVC.swift; sourceTree = "<group>"; };
 		038833A12104A0490026CD61 /* MovieDBFawaz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieDBFawaz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		038833A42104A04F0026CD61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		038833A92104A0550026CD61 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -191,6 +195,7 @@
 		03ACF9AD2104D08C00E4FCAE /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				0309038021071AC8001FEAAE /* DateFormatter.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -210,6 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				03D9073A2105BED300B4AB68 /* MovieListVC.swift */,
+				0309038221074630001FEAAE /* MovieDetailVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -481,11 +487,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0309038121071AC8001FEAAE /* DateFormatter.swift in Sources */,
 				03D9073D2105C79000B4AB68 /* MovieListCell.swift in Sources */,
 				03D907412105CD1400B4AB68 /* MovieAPI.swift in Sources */,
 				038833AD2104A05D0026CD61 /* MovieDBFawaz.xcdatamodeld in Sources */,
 				03D9073B2105BED300B4AB68 /* MovieListVC.swift in Sources */,
 				03D907442105F98800B4AB68 /* MockApi.swift in Sources */,
+				0309038321074630001FEAAE /* MovieDetailVC.swift in Sources */,
 				03ACF9B32104D1D500E4FCAE /* Movie.swift in Sources */,
 				03D9073F2105CCC300B4AB68 /* API.swift in Sources */,
 				038833A52104A04F0026CD61 /* AppDelegate.swift in Sources */,
@@ -666,7 +674,10 @@
 				DEVELOPMENT_TEAM = RWBDE25HP7;
 				INFOPLIST_FILE = "$(SRCROOT)/MovieDBFawaz/Supporting Files/Info.plist";
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = bpn.MovieDBFawaz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -683,7 +694,10 @@
 				DEVELOPMENT_TEAM = RWBDE25HP7;
 				INFOPLIST_FILE = "$(SRCROOT)/MovieDBFawaz/Supporting Files/Info.plist";
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = bpn.MovieDBFawaz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -700,7 +714,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RWBDE25HP7;
 				INFOPLIST_FILE = MovieDBFawazTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = bpn.MovieDBFawazTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -718,7 +736,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RWBDE25HP7;
 				INFOPLIST_FILE = MovieDBFawazTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = bpn.MovieDBFawazTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -735,7 +757,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RWBDE25HP7;
 				INFOPLIST_FILE = MovieDBFawazUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = bpn.MovieDBFawazUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -752,7 +778,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RWBDE25HP7;
 				INFOPLIST_FILE = MovieDBFawazUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = bpn.MovieDBFawazUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

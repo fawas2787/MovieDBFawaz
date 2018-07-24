@@ -22,6 +22,7 @@ class MovieListCell: UITableViewCell {
         // Initialization code
     }
     
+    
     var movie: Movie? {
         didSet {
             self.updateUI()
@@ -33,8 +34,8 @@ class MovieListCell: UITableViewCell {
         let resource = ImageResource(downloadURL: url, cacheKey: movie.title)
         moviePosterImg.kf.setImage(with: resource, placeholder: #imageLiteral(resourceName: "placeholder"), options: [.transition(.fade(0.3))])
         movieNameLabel.text = movie.title
-     
-     //   dateLabel.text = DF.format(date: movie.releaseDate)
+        overViewTextView.text = movie.overview
+        releaseDateLabel.text = "Release Date: \(DF.format(date: movie.releaseDate))"
     }
    
     
