@@ -21,6 +21,7 @@ class MovieDetailVC: UIViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("backdrop url\(rcvdBackdrop)")
         self.updateUI()
        
     }
