@@ -89,7 +89,10 @@
                                 <rect key="frame" x="16" y="22" width="343" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="search"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="m9F-qF-4Kt"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.93855246113989632" green="0.93855246113989632" blue="0.93855246113989632" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -107,6 +110,7 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="V42-ib-KZ5" id="Nka-nB-Q1M"/>
+                        <outlet property="txtSearchBar" destination="NcO-Tm-v2o" id="hPA-os-wKe"/>
                         <segue destination="JYk-91-g7X" kind="show" identifier="DetailSegue" id="H8X-yO-u4z"/>
                     </connections>
                 </viewController>

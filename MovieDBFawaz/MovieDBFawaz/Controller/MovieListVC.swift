@@ -9,21 +9,34 @@
 import UIKit
 import Moya
 import Kingfisher
-class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UISearchBarDelegate {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var txtSearchBar: UITextField!
+    
     
     var nowPlayingMovies: [Movie]!
     var suggestedMovies: [Movie]!
+    var filteredMovies = [Movie]()
+    
     var movie: Movie?
     var slctdBackdrop:String = ""
     var slctdMovieTitle:String = ""
     var slctdOverView:String = ""
     var url:String = ""
+    var isSearching: Bool = false
+    
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
         self.getMovies()
+       
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,6 +53,10 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
             self.tableView.reloadData()
         })
     }
+    
+    // Custom Search Function
+    
+    
     
     // *** -- TableView Delegate -- *** \\
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -78,6 +95,35 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         return 147.0;//Choose your custom row height
     }
     
+    //** - UITextView Delegates
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField.text == nil || textField.text == ""
+        {
+            isSearching = false
+            tableView.reloadData()
+            view.endEditing(true)
+            view.resignFirstResponder()
+        }
+        else
+        {
+            isSearching = true
+            guard let query = textField.text?.trimmingCharacters(in: .whitespaces) else
+            {
+                fatalError("no query string")
+            }
+            
+            //assiginig searching from new movies
+            filteredMovies = nowPlayingMovies.filter { $0.title.localizedCaseInsensitiveContains(query) }
+            tableView.reloadData()
+        }
+        
+        self.resignFirstResponder()
+        self.view.endEditing(true)
+        
+        return true
+    }
+    
     // segue Method
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
@@ -92,5 +138,9 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         }
     }
     
+    
+    
 
 }
+
+
