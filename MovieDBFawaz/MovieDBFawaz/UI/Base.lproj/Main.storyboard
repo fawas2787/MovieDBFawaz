@@ -85,8 +85,9 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="VX6-Gf-NYI"/>
                                 </connections>
                             </tableView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search Any Movie" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="NcO-Tm-v2o">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search Any Movie" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="NcO-Tm-v2o">
                                 <rect key="frame" x="16" y="22" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="search"/>
@@ -98,13 +99,9 @@
                         <color key="backgroundColor" red="0.93855246113989632" green="0.93855246113989632" blue="0.93855246113989632" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="V42-ib-KZ5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="0gX-9X-Oie"/>
-                            <constraint firstItem="NcO-Tm-v2o" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="6I1-IV-VFf"/>
                             <constraint firstItem="V42-ib-KZ5" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="40" id="I7F-wy-6R0"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="NcO-Tm-v2o" secondAttribute="trailing" constant="16" id="RSR-zA-Qvt"/>
-                            <constraint firstItem="NcO-Tm-v2o" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="2" id="fno-Ms-o1N"/>
                             <constraint firstItem="V42-ib-KZ5" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="lue-Rc-xP3"/>
                             <constraint firstItem="V42-ib-KZ5" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="pr7-8n-qFh"/>
-                            <constraint firstItem="V42-ib-KZ5" firstAttribute="top" secondItem="NcO-Tm-v2o" secondAttribute="bottom" constant="8" id="vk5-Wt-v5u"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

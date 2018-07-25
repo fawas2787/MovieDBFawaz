@@ -15,7 +15,7 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     @IBOutlet weak var txtSearchBar: UITextField!
     
     
-    var nowPlayingMovies: [Movie]!
+    var nowPlayingMovies = [Movie]()
     var suggestedMovies: [Movie]!
     var filteredMovies = [Movie]()
     
@@ -26,6 +26,10 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     var url:String = ""
     var isSearching: Bool = false
     
+    let itemsPerPage = 20
+    var offset = 0
+    var reachedEndofItems = false
+    
    
     
     override func viewDidLoad() {
@@ -33,7 +37,7 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         
         
         
-        self.getMovies()
+        self.getMovies(startingPageIndex: 1)
        
         
         
@@ -44,8 +48,11 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     }
     
 
+    
   // Access the getNewMMovies
     
+    
+    /*
     func getMovies()
     {
         API.getNewMovies(page: 1, completion: {movies in
@@ -53,6 +60,26 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
             self.tableView.reloadData()
         })
     }
+    */
+    // loadmore
+    func loadMore()
+    {
+        print("lastItem Reached")
+        let startingPageIndex = self.nowPlayingMovies.count + 1 // get the index
+        getMovies(startingPageIndex: startingPageIndex) // call load movies api
+    }
+    
+    func getMovies(startingPageIndex: Int) {
+        API.getNewMovies(page: startingPageIndex, completion: {movies in
+            if self.nowPlayingMovies.count > 0 {
+                self.nowPlayingMovies += movies
+            } else {
+                self.nowPlayingMovies = movies
+            }
+            self.tableView.reloadData()
+        })
+    }
+  
     
     // Custom Search Function
     
@@ -60,19 +87,22 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     
     // *** -- TableView Delegate -- *** \\
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         if nowPlayingMovies == nil {
             return 0
         }
+ 
         return nowPlayingMovies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieListCell", for: indexPath) as! MovieListCell
         
-        cell.movie = nowPlayingMovies![indexPath.row]
+        cell.movie = nowPlayingMovies[indexPath.row]
+        
         return cell
     }
-    
+    // tableView Selection
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailVC") as! MovieDetailVC
@@ -93,6 +123,15 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
         return 147.0;//Choose your custom row height
+    }
+    
+    // display more data
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // Check if the last row number is the same as the last current data element
+        if indexPath.row == self.nowPlayingMovies.count - 1 {
+           
+            self.loadMore()
+        }
     }
     
     //** - UITextView Delegates
