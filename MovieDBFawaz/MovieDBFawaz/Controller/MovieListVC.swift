@@ -18,7 +18,7 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     var nowPlayingMovies: [Movie] = []
     var suggestedMovies: [Movie]!
     var filteredMovies = [Movie]()
-    var results: [APIResults]!
+    
     
     var movie: Movie?
     var slctdBackdrop:String = ""
@@ -53,25 +53,17 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
   // Access the getNewMMovies
     
     
-    /*
+    
     func getMovies()
     {
-        API.getNewMovies(page: 1, completion: {movies in
-            self.nowPlayingMovies = movies
-            self.tableView.reloadData()
-        })
+       
     }
-    */
+ 
     
  
     // loadmore
     func loadMore()
     {
-        /*
-        print("lastItem Reached")
-        let startingPageIndex = self.nowPlayingMovies.count + 1 // get the index
-        getMovies(startingPageIndex: startingPageIndex) // call load movies api
-        */
         //get the page number
         var nextPage: Int = 1
         if lastPageRetrieved > 0
@@ -103,18 +95,31 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     
     // *** -- TableView Delegate -- *** \\
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        /*
+        
         if nowPlayingMovies == nil {
             return 0
         }
-        */
+        if isSearching
+        {
+            return filteredMovies.count
+        }
+        else
+        {
         return nowPlayingMovies.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieListCell", for: indexPath) as! MovieListCell
         
+        if isSearching
+        {
+            cell.movie = filteredMovies[indexPath.row]
+        }
+        else
+        {
         cell.movie = nowPlayingMovies[indexPath.row]
+        }
         
         return cell
     }

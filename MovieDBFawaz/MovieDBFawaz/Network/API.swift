@@ -34,4 +34,28 @@ class API
             }
         }
     }
+    
+    // get API Reults
+    /*
+    static func getWholeResults()
+    {
+        provider.request(.results(completion: (String?)->()))
+        { result in
+            switch result
+            {
+            case let .success(response):
+                do {
+                    let results = try JSONDecoder().decode(APIResults.self, from: response.data)
+                    completion(results)
+                }catch let err{
+                    print(err)
+                }
+            case let .failure(error):
+                print(error)
+            }
+                }
+            }
+        }
+    }
+ */
 }

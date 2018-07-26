@@ -13,6 +13,8 @@ extension MovieApi {
         switch self {
         case .suggestedMovies, .newMovies:
             return stubbedResponse("Movies")
+        case .results:
+            return stubbedResponse("")
         }
     }
     
