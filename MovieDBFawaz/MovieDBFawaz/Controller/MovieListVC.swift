@@ -15,9 +15,10 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     @IBOutlet weak var txtSearchBar: UITextField!
     
     
-    var nowPlayingMovies = [Movie]()
+    var nowPlayingMovies: [Movie] = []
     var suggestedMovies: [Movie]!
     var filteredMovies = [Movie]()
+    var results: [APIResults]!
     
     var movie: Movie?
     var slctdBackdrop:String = ""
@@ -25,7 +26,7 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     var slctdOverView:String = ""
     var url:String = ""
     var isSearching: Bool = false
-    
+    var lastPageRetrieved: Int = 0
     let itemsPerPage = 20
     var offset = 0
     var reachedEndofItems = false
@@ -37,7 +38,7 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         
         
         
-        self.getMovies(startingPageIndex: 1)
+        self.getMovies(page: 1)
        
         
         
@@ -61,21 +62,36 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         })
     }
     */
+    
+ 
     // loadmore
     func loadMore()
     {
+        /*
         print("lastItem Reached")
         let startingPageIndex = self.nowPlayingMovies.count + 1 // get the index
         getMovies(startingPageIndex: startingPageIndex) // call load movies api
+        */
+        //get the page number
+        var nextPage: Int = 1
+        if lastPageRetrieved > 0
+        {
+            nextPage += lastPageRetrieved
+        }
+        getMovies(page: nextPage)
     }
     
-    func getMovies(startingPageIndex: Int) {
-        API.getNewMovies(page: startingPageIndex, completion: {movies in
-            if self.nowPlayingMovies.count > 0 {
-                self.nowPlayingMovies += movies
-            } else {
-                self.nowPlayingMovies = movies
-            }
+    func getMovies(page: Int) {
+        API.getNewMovies(page: page, completion: {movies in
+            
+            
+           // Append the new movies to the data source
+            self.nowPlayingMovies += movies
+            
+            // Record the last page you retrieved
+            self.lastPageRetrieved = page
+            print("last Page: \(self.lastPageRetrieved)")
+            
             self.tableView.reloadData()
         })
     }
@@ -87,11 +103,11 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     
     // *** -- TableView Delegate -- *** \\
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+        /*
         if nowPlayingMovies == nil {
             return 0
         }
- 
+        */
         return nowPlayingMovies.count
     }
     
@@ -129,8 +145,11 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         // Check if the last row number is the same as the last current data element
         if indexPath.row == self.nowPlayingMovies.count - 1 {
+            if !reachedEndofItems
+            {
+                 self.loadMore()
+            }
            
-            self.loadMore()
         }
     }
     
