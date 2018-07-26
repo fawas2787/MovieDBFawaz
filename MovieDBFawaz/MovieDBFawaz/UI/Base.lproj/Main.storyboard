@@ -38,19 +38,19 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="65z-bl-ytW">
-                                                    <rect key="frame" x="130" y="11" width="269" height="21"/>
+                                                    <rect key="frame" x="130" y="11" width="230" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Release Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yeq-N9-lWR">
-                                                    <rect key="frame" x="130" y="40" width="269" height="15"/>
+                                                    <rect key="frame" x="130" y="40" width="230" height="15"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.75651716321243523" green="0.75651716321243523" blue="0.75651716321243523" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="OverView" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="8vu-48-dki">
-                                                    <rect key="frame" x="130" y="63" width="269" height="70"/>
+                                                    <rect key="frame" x="130" y="63" width="230" height="70"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -85,28 +85,29 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="VX6-Gf-NYI"/>
                                 </connections>
                             </tableView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search Any Movie" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="NcO-Tm-v2o">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search Any Movie" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="NcO-Tm-v2o">
                                 <rect key="frame" x="16" y="22" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="search"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="m9F-qF-4Kt"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.93855246113989632" green="0.93855246113989632" blue="0.93855246113989632" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="V42-ib-KZ5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="0gX-9X-Oie"/>
-                            <constraint firstItem="NcO-Tm-v2o" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="6I1-IV-VFf"/>
                             <constraint firstItem="V42-ib-KZ5" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="40" id="I7F-wy-6R0"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="NcO-Tm-v2o" secondAttribute="trailing" constant="16" id="RSR-zA-Qvt"/>
-                            <constraint firstItem="NcO-Tm-v2o" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="2" id="fno-Ms-o1N"/>
                             <constraint firstItem="V42-ib-KZ5" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="lue-Rc-xP3"/>
                             <constraint firstItem="V42-ib-KZ5" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="pr7-8n-qFh"/>
-                            <constraint firstItem="V42-ib-KZ5" firstAttribute="top" secondItem="NcO-Tm-v2o" secondAttribute="bottom" constant="8" id="vk5-Wt-v5u"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="V42-ib-KZ5" id="Nka-nB-Q1M"/>
+                        <outlet property="txtSearchBar" destination="NcO-Tm-v2o" id="hPA-os-wKe"/>
                         <segue destination="JYk-91-g7X" kind="show" identifier="DetailSegue" id="H8X-yO-u4z"/>
                     </connections>
                 </viewController>
