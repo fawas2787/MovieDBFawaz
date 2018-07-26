@@ -2,7 +2,7 @@
 //  API.swift
 //  MovieDBFawaz
 //
-//  Created by Mohammed  Hijas on 7/23/18.
+//  Created by Mohammed  Fawaz on 7/23/18.
 //  Copyright © 2018 Fawaz @ Boopin. All rights reserved.
 //
 
@@ -34,28 +34,4 @@ class API
             }
         }
     }
-    
-    // get API Reults
-    /*
-    static func getWholeResults()
-    {
-        provider.request(.results(completion: (String?)->()))
-        { result in
-            switch result
-            {
-            case let .success(response):
-                do {
-                    let results = try JSONDecoder().decode(APIResults.self, from: response.data)
-                    completion(results)
-                }catch let err{
-                    print(err)
-                }
-            case let .failure(error):
-                print(error)
-            }
-                }
-            }
-        }
-    }
- */
 }

@@ -2,7 +2,7 @@
 //  MovieDetailVC.swift
 //  MovieDBFawaz
 //
-//  Created by Mohammed  Hijas on 7/24/18.
+//  Created by Mohammed  Fawaz on 7/24/18.
 //  Copyright © 2018 Fawaz @ Boopin. All rights reserved.
 //
 
@@ -27,8 +27,6 @@ class MovieDetailVC: UIViewController {
     }
     
     func updateUI(){
-      
-    //    guard let movie = movie, let url = URL(string: "https://image.tmdb.org/t/p/w500\(movie.backdrop)")  else { return }
         let url = URL(string: "https://image.tmdb.org/t/p/w500\(rcvdBackdrop)")
         let resource = ImageResource(downloadURL: url!, cacheKey: rcvdMovieTitle)
         backDropImage.kf.setImage(with: resource, placeholder: #imageLiteral(resourceName: "placeholder"), options: [.transition(.fade(0.3))])

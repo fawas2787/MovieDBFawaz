@@ -2,7 +2,7 @@
 //  MovieListVC.swift
 //  MovieDBFawaz
 //
-//  Created by Mohammed  Hijas on 7/23/18.
+//  Created by Mohammed  Fawaz on 7/23/18.
 //  Copyright © 2018 Fawaz @ Boopin. All rights reserved.
 //
 
@@ -27,52 +27,29 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     var url:String = ""
     var isSearching: Bool = false
     var lastPageRetrieved: Int = 0
-    let itemsPerPage = 20
-    var offset = 0
     var reachedEndofItems = false
     
    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        
+        // Start Loading Movie API (Latest Movies) from Any Page you like
         self.getMovies(page: 1)
-       
-        
-        
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
-
-    
-  // Access the getNewMMovies
-    
-    
-    
-    func getMovies()
-    {
-       
-    }
- 
-    
- 
-    // loadmore
+    // Load more data of the Next Page when the last item of the particular page reached
     func loadMore()
     {
         //get the page number
         var nextPage: Int = 1
         if lastPageRetrieved > 0
         {
+            //Append the Page Number According to last Page
             nextPage += lastPageRetrieved
         }
         getMovies(page: nextPage)
     }
-    
+    // Call the new movies API according to the page no
     func getMovies(page: Int) {
         API.getNewMovies(page: page, completion: {movies in
             
@@ -89,16 +66,14 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     }
   
     
-    // Custom Search Function
-    
-    
-    
+   
     // *** -- TableView Delegate -- *** \\
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+        /*
         if nowPlayingMovies == nil {
             return 0
         }
+        */
         if isSearching
         {
             return filteredMovies.count
@@ -123,6 +98,7 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         
         return cell
     }
+    
     // tableView Selection
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -163,6 +139,7 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField.text == nil || textField.text == ""
         {
+            // When no strings in search field then searching is disabled.
             isSearching = false
             tableView.reloadData()
             view.endEditing(true)
@@ -176,7 +153,7 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
                 fatalError("no query string")
             }
             
-            //assiginig searching from new movies
+            //Filtering the New Movies According to the Movie Title
             filteredMovies = nowPlayingMovies.filter { $0.title.localizedCaseInsensitiveContains(query) }
             tableView.reloadData()
         }
@@ -187,10 +164,9 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         return true
     }
     
-    // segue Method
+    //Segue Method
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
-        
         if (segue.identifier == "DetailSegue")
         {
             let destination = segue.destination as! MovieDetailVC
