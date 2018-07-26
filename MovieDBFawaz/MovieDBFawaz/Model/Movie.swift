@@ -2,7 +2,7 @@
 //  Movie.swift
 //  MovieDBFawaz
 //
-//  Created by Mohammed  Hijas on 7/22/18.
+//  Created by Mohammed  Fawaz on 7/22/18.
 //  Copyright © 2018 Fawaz @ Boopin. All rights reserved.
 //
 

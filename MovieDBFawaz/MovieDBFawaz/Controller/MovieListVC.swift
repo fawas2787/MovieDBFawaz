@@ -24,6 +24,7 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     var slctdBackdrop:String = ""
     var slctdMovieTitle:String = ""
     var slctdOverView:String = ""
+    var slctdReleaseDate:String = ""
     var url:String = ""
     var isSearching: Bool = false
     var lastPageRetrieved: Int = 0
@@ -76,6 +77,17 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         */
         if isSearching
         {
+            if (filteredMovies.count == 0)
+            {
+                // create the alert
+                let alert = UIAlertController(title: "Info", message: "No Search Results Found!", preferredStyle: UIAlertControllerStyle.alert)
+                
+                // add an action (button)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                
+                // show the alert
+                self.present(alert, animated: true, completion: nil)
+            }
             return filteredMovies.count
         }
         else
@@ -101,18 +113,24 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     
     // tableView Selection
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailVC") as! MovieDetailVC
-        
-        let selectedMovie = nowPlayingMovies[indexPath.row]
-        slctdBackdrop = selectedMovie.backdrop
-        slctdOverView = selectedMovie.overview
-        slctdMovieTitle = selectedMovie.title
+         if isSearching
+        {
+            let selectedMovie = filteredMovies[indexPath.row]
+            slctdBackdrop = selectedMovie.backdrop
+            slctdOverView = selectedMovie.overview
+            slctdMovieTitle = selectedMovie.title
+            slctdReleaseDate = selectedMovie.releaseDate
+        }
+        else
+        {
+            let selectedMovie = nowPlayingMovies[indexPath.row]
+            slctdBackdrop = selectedMovie.backdrop
+            slctdOverView = selectedMovie.overview
+            slctdMovieTitle = selectedMovie.title
+            slctdReleaseDate = selectedMovie.releaseDate
+        }
         
         performSegue(withIdentifier: "DetailSegue", sender: self)
-        
-        self.present(detailVC, animated: true, completion: nil)
-     
         
     }
     
@@ -163,7 +181,7 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         
         return true
     }
-    
+  
     //Segue Method
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
@@ -173,6 +191,7 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
             destination.rcvdBackdrop = slctdBackdrop
             destination.rcvdMovieTitle = slctdMovieTitle
             destination.rcvdOverView = slctdOverView
+            destination.rcvdReleaseDate = slctdReleaseDate
             
         }
     }

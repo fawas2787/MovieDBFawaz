@@ -2,7 +2,7 @@
 //  DateFormatter.swift
 //  MovieDBFawaz
 //
-//  Created by Mohammed  Hijas on 7/24/18.
+//  Created by Mohammed  Fawaz on 7/24/18.
 //  Copyright © 2018 Fawaz @ Boopin. All rights reserved.
 //
 

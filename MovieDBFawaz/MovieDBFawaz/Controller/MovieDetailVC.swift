@@ -14,10 +14,12 @@ class MovieDetailVC: UIViewController {
     @IBOutlet weak var backDropImage: UIImageView!
     @IBOutlet weak var movieTitle: UILabel!
     @IBOutlet weak var movieOverview: UITextView!
+    @IBOutlet weak var releaseDate: UILabel!
     
     var rcvdBackdrop:String = ""
     var rcvdOverView:String = ""
     var rcvdMovieTitle:String = ""
+    var rcvdReleaseDate:String = ""
    
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,11 +30,12 @@ class MovieDetailVC: UIViewController {
     
     func updateUI(){
         let url = URL(string: "https://image.tmdb.org/t/p/w500\(rcvdBackdrop)")
-        let resource = ImageResource(downloadURL: url!, cacheKey: rcvdMovieTitle)
+        let resource = ImageResource(downloadURL: url!)
         backDropImage.kf.setImage(with: resource, placeholder: #imageLiteral(resourceName: "placeholder"), options: [.transition(.fade(0.3))])
         movieTitle.text = rcvdMovieTitle
         movieOverview.text = rcvdOverView
        // releaseDateLabel.text = "Release Date: \(DF.format(date: movie.releaseDate))"
+        releaseDate.text = "Release Date: \(DF.format(date: rcvdReleaseDate))"
     }
 
     override func didReceiveMemoryWarning() {
