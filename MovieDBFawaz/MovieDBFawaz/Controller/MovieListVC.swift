@@ -18,7 +18,8 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     var nowPlayingMovies: [Movie] = []
     var suggestedMovies: [Movie]!
     var filteredMovies = [Movie]()
-    
+    var searchedKeyArray = [String]()
+    var searchHistoryArray = [String]()
     
     var movie: Movie?
     var slctdBackdrop:String = ""
@@ -27,8 +28,10 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     var slctdReleaseDate:String = ""
     var url:String = ""
     var isSearching: Bool = false
+    var isSearchFocused: Bool = false
     var lastPageRetrieved: Int = 0
     var reachedEndofItems = false
+    var searchKeyword: String = ""
     
    
     
@@ -36,6 +39,9 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         super.viewDidLoad()
         // Start Loading Movie API (Latest Movies) from Any Page you like
         self.getMovies(page: 1)
+        
+        
+        
     }
 
     // Load more data of the Next Page when the last item of the particular page reached
@@ -168,7 +174,7 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     }
     
     //** - UITextView Delegates
-    
+    // When search key pressed
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField.text == nil || textField.text == ""
         {
@@ -185,6 +191,13 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
             {
                 fatalError("no query string")
             }
+            // save all search keys into User Defaults
+            UserDefaults.standard.set(txtSearchBar.text, forKey: "searchKey")
+            searchKeyword = txtSearchBar.text!
+            
+            searchedKeyArray.append(searchKeyword)
+            UserDefaults.standard.set(searchedKeyArray, forKey: "searchArrayKey")
+            print("search Keywords Array", searchedKeyArray)
             
             //Filtering the New Movies According to the Movie Title
             filteredMovies = nowPlayingMovies.filter { $0.title.localizedCaseInsensitiveContains(query) }
@@ -195,6 +208,20 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         self.view.endEditing(true)
         
         return true
+    }
+    
+    //when search textfield focused
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+            isSearchFocused = true
+        searchHistoryArray = UserDefaults.standard.stringArray(forKey: "searchArrayKey") ?? [String]()
+        print("Search History Array:\(searchHistoryArray)")
+            print("Text Field Focused")
+    }
+    
+    //when search textfield lost focused
+    func textFieldDidEndEditing(_ textField: UITextField) {
+            isSearchFocused = false
+            print("Text Field Focuse Lost")
     }
   
     //Segue Method
@@ -210,14 +237,7 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
             
         }
     }
-    
-   
-    
-    
-    
-    
-
 }
- // null handling extension
+
 
 
