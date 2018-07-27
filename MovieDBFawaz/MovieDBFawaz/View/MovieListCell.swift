@@ -30,7 +30,7 @@ class MovieListCell: UITableViewCell {
     }
     
     private  func updateUI(){
-        guard let movie = movie, let url = URL(string: "https://image.tmdb.org/t/p/w92\(movie.posterPath)")  else { return }
+        guard let movie = movie, let url = URL(string: "https://image.tmdb.org/t/p/w92\(movie.posterPath ?? "Notfound")")  else { return }
         let resource = ImageResource(downloadURL: url, cacheKey: movie.title)
         moviePosterImg.kf.setImage(with: resource, placeholder: #imageLiteral(resourceName: "placeholder"), options: [.transition(.fade(0.3))])
         movieNameLabel.text = movie.title

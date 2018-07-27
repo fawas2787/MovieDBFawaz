@@ -15,7 +15,7 @@ class DF {
     static func format(date: String) -> String {
         instance.dateFormat = "yyyy-MM-dd"
         guard let date = instance.date(from: date) else { fatalError("could not format date") }
-        instance.dateFormat = "MMM, dd, yyyy"
+        instance.dateFormat = "MMM dd yyyy"
         return instance.string(from: date)
     }
 }

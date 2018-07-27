@@ -11,7 +11,7 @@ import Foundation
 struct APIResults: Decodable {
     let page: Int
     let numResults: Int
-    let numPages: Int
+    let numPages: Int?
     let movies: [Movie]
     
     private enum CodingKeys: String, CodingKey {
@@ -21,9 +21,9 @@ struct APIResults: Decodable {
 
 struct Movie: Decodable  {
     let id:Int!
-    let posterPath: String
+    let posterPath: String?
     var videoPath: String?
-    let backdrop: String
+    let backdrop: String?
     let title: String
     var releaseDate: String
     var rating: Double

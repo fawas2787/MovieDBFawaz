@@ -105,7 +105,7 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         }
         else
         {
-        cell.movie = nowPlayingMovies[indexPath.row]
+            cell.movie = nowPlayingMovies[indexPath.row]
         }
         
         return cell
@@ -115,8 +115,17 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
          if isSearching
         {
+            
             let selectedMovie = filteredMovies[indexPath.row]
-            slctdBackdrop = selectedMovie.backdrop
+            if selectedMovie.backdrop != nil {
+                slctdBackdrop = selectedMovie.backdrop!
+            }
+            else
+            {
+                slctdBackdrop = "NotFound"
+            }
+            
+            
             slctdOverView = selectedMovie.overview
             slctdMovieTitle = selectedMovie.title
             slctdReleaseDate = selectedMovie.releaseDate
@@ -124,7 +133,13 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         else
         {
             let selectedMovie = nowPlayingMovies[indexPath.row]
-            slctdBackdrop = selectedMovie.backdrop
+             if selectedMovie.backdrop != nil {
+            slctdBackdrop = selectedMovie.backdrop!
+            }
+            else
+             {
+                slctdBackdrop = "NotFound"
+            }
             slctdOverView = selectedMovie.overview
             slctdMovieTitle = selectedMovie.title
             slctdReleaseDate = selectedMovie.releaseDate
@@ -196,9 +211,13 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         }
     }
     
+   
+    
+    
     
     
 
 }
+ // null handling extension
 
 

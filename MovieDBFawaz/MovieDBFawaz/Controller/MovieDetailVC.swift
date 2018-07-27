@@ -34,7 +34,6 @@ class MovieDetailVC: UIViewController {
         backDropImage.kf.setImage(with: resource, placeholder: #imageLiteral(resourceName: "placeholder"), options: [.transition(.fade(0.3))])
         movieTitle.text = rcvdMovieTitle
         movieOverview.text = rcvdOverView
-       // releaseDateLabel.text = "Release Date: \(DF.format(date: movie.releaseDate))"
         releaseDate.text = "Release Date: \(DF.format(date: rcvdReleaseDate))"
     }
 
