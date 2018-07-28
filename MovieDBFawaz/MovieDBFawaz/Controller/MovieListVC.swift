@@ -12,6 +12,7 @@ import Kingfisher
 class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UISearchBarDelegate {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableViewSuggested: UITableView!
     @IBOutlet weak var txtSearchBar: UITextField!
     @IBOutlet weak var popMoviesList: UIView!
    
@@ -42,6 +43,11 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         popMoviesList.isHidden = true
         
         
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        searchHistoryArray = UserDefaults.standard.stringArray(forKey: "searchArrayKey") ?? [String]()
     }
 
     // Load more data of the Next Page when the last item of the particular page reached
@@ -79,6 +85,13 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
             return 0
         }
         */
+        //suggested search tableview delegates
+        if tableView == self.tableViewSuggested
+        {
+            return searchHistoryArray.count
+        }
+        
+        // movie list search tableview delegates
         if isSearching
         {
             if (filteredMovies.count == 0)
@@ -101,6 +114,16 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if tableView == self.tableViewSuggested
+        {
+            let sCell = tableView.dequeueReusableCell(withIdentifier: "SearchListCell", for: indexPath) as! SearchListCell
+            
+            sCell.keywordLabel.text = searchHistoryArray[indexPath.row]
+            
+            return sCell
+        }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieListCell", for: indexPath) as! MovieListCell
         
         if isSearching
@@ -117,6 +140,13 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     
     // tableView Selection
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+         if tableView == self.tableViewSuggested
+         {
+            txtSearchBar.text = searchHistoryArray[indexPath.row]
+         }
+        else
+         {
          if isSearching
         {
             
@@ -150,12 +180,16 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         }
         
         performSegue(withIdentifier: "DetailSegue", sender: self)
-        
+        }
     }
     
     // set custom hieght to the Movie List Cell
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
+        if tableView == self.tableViewSuggested
+        {
+            return 66.0
+        }
         return 147.0;//Choose your custom row height
     }
     
@@ -194,6 +228,7 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
             searchKeyword = txtSearchBar.text!
             
             searchedKeyArray.append(searchKeyword)
+            
                 UserDefaults.standard.set(searchedKeyArray, forKey: "searchArrayKey")
             print("search Keywords Array", searchedKeyArray)
             

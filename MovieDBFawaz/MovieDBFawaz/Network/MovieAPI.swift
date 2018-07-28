@@ -33,7 +33,7 @@ extension MovieApi: TargetType
     var path: String {
         switch self {
         case .suggestedMovies(let id):
-            return "\(id)/suggestions"
+            return "\(id)/recommendations"
         case .newMovies:
             return "now_playing"
         

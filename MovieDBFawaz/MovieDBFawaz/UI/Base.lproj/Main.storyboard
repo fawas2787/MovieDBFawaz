@@ -22,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="110" width="375" height="557"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MovieListCell" rowHeight="147" id="LOl-Ii-Mex" customClass="MovieListCell" customModule="MovieDBFawaz" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MovieListCell" rowHeight="147" id="LOl-Ii-Mex" customClass="MovieListCell" customModule="MovieDBFawaz" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="147"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LOl-Ii-Mex" id="A8I-5k-dJz">
@@ -96,15 +96,59 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JJz-sg-Rae">
                                 <rect key="frame" x="0.0" y="110" width="375" height="557"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Suggested Movies List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bdV-vf-uJx">
-                                        <rect key="frame" x="8" y="8" width="178" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Suggested Movies List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bdV-vf-uJx">
+                                        <rect key="frame" x="8" y="8" width="359" height="21"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NCk-Dj-qQD">
+                                        <rect key="frame" x="0.0" y="37" width="375" height="520"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchListCell" id="CVd-Mc-akJ" customClass="SearchListCell" customModule="MovieDBFawaz" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CVd-Mc-akJ" id="cyt-kq-doq">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Searched Keyword" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HQY-nh-59C">
+                                                            <rect key="frame" x="15" y="11" width="345" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" red="0.11342760172906929" green="0.58236135687491175" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="HQY-nh-59C" firstAttribute="leading" secondItem="cyt-kq-doq" secondAttribute="leading" constant="15" id="Q5c-qK-mVN"/>
+                                                        <constraint firstItem="HQY-nh-59C" firstAttribute="top" secondItem="cyt-kq-doq" secondAttribute="top" constant="11" id="dxG-cu-6g1"/>
+                                                        <constraint firstAttribute="trailing" secondItem="HQY-nh-59C" secondAttribute="trailing" constant="15" id="sY5-9E-n6g"/>
+                                                    </constraints>
+                                                </tableViewCellContentView>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="HQY-nh-59C" secondAttribute="bottom" constant="12" id="9cD-GS-xWe"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outlet property="keywordLabel" destination="HQY-nh-59C" id="acx-u1-tUH"/>
+                                                </connections>
+                                            </tableViewCell>
+                                        </prototypes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="BYZ-38-t0r" id="que-w3-DvD"/>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="1bd-1I-K9I"/>
+                                        </connections>
+                                    </tableView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="NCk-Dj-qQD" secondAttribute="trailing" id="BRM-4D-vQH"/>
+                                    <constraint firstItem="NCk-Dj-qQD" firstAttribute="top" secondItem="bdV-vf-uJx" secondAttribute="bottom" constant="8" symbolic="YES" id="I0Y-7A-sK3"/>
+                                    <constraint firstAttribute="bottom" secondItem="NCk-Dj-qQD" secondAttribute="bottom" id="UYr-5z-PfN"/>
+                                    <constraint firstItem="NCk-Dj-qQD" firstAttribute="leading" secondItem="JJz-sg-Rae" secondAttribute="leading" id="j69-pa-FSE"/>
+                                    <constraint firstItem="bdV-vf-uJx" firstAttribute="leading" secondItem="JJz-sg-Rae" secondAttribute="leading" constant="8" id="rwM-Tp-xw7"/>
+                                    <constraint firstAttribute="trailing" secondItem="bdV-vf-uJx" secondAttribute="trailing" constant="8" id="zhp-zD-aL0"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.93855246113989632" green="0.93855246113989632" blue="0.93855246113989632" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -116,6 +160,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="NcO-Tm-v2o" secondAttribute="trailing" constant="8" id="Lap-H4-hgu"/>
                             <constraint firstItem="JJz-sg-Rae" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Vax-Iz-dnG"/>
                             <constraint firstItem="NcO-Tm-v2o" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="YqF-Wp-02D"/>
+                            <constraint firstItem="NCk-Dj-qQD" firstAttribute="top" secondItem="NcO-Tm-v2o" secondAttribute="bottom" constant="45" id="dZz-Ih-6Jy"/>
                             <constraint firstItem="V42-ib-KZ5" firstAttribute="top" secondItem="NcO-Tm-v2o" secondAttribute="bottom" constant="8" id="eTa-O7-PF6"/>
                             <constraint firstItem="NcO-Tm-v2o" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="7" id="iMJ-8L-Mxn"/>
                             <constraint firstItem="V42-ib-KZ5" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="lue-Rc-xP3"/>
@@ -128,6 +173,7 @@
                     <connections>
                         <outlet property="popMoviesList" destination="JJz-sg-Rae" id="V1t-FS-0rY"/>
                         <outlet property="tableView" destination="V42-ib-KZ5" id="Nka-nB-Q1M"/>
+                        <outlet property="tableViewSuggested" destination="NCk-Dj-qQD" id="jnw-xz-1aD"/>
                         <outlet property="txtSearchBar" destination="NcO-Tm-v2o" id="hPA-os-wKe"/>
                         <segue destination="JYk-91-g7X" kind="show" identifier="DetailSegue" id="hQ3-2h-thW"/>
                     </connections>
