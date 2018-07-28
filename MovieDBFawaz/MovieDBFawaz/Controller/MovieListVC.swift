@@ -21,6 +21,7 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     var filteredMovies = [Movie]()
     var searchedKeyArray = [String]()
     var searchHistoryArray = [String]()
+    var recentResultsArray = [String]()
     
     var movie: Movie?
     var slctdBackdrop:String = ""
@@ -38,17 +39,16 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       
         // Start Loading Movie API (Latest Movies) from Any Page you like
         self.getMovies(page: 1)
         popMoviesList.isHidden = true
         
         
         
+        
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        searchHistoryArray = UserDefaults.standard.stringArray(forKey: "searchArrayKey") ?? [String]()
-    }
 
     // Load more data of the Next Page when the last item of the particular page reached
     func loadMore()
@@ -80,11 +80,7 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
 
     // *** -- TableView Delegate -- *** \\
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        /*
-        if nowPlayingMovies == nil {
-            return 0
-        }
-        */
+      
         //suggested search tableview delegates
         if tableView == self.tableViewSuggested
         {
@@ -140,17 +136,19 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     
     // tableView Selection
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+         // select the recent searched keywords
          if tableView == self.tableViewSuggested
          {
             txtSearchBar.text = searchHistoryArray[indexPath.row]
          }
         else
          {
-         if isSearching
-        {
             
+           if isSearching
+        {
+            // select and pass the values of current searched keyword
             let selectedMovie = filteredMovies[indexPath.row]
+            //handling the backdrop path nil error
             if selectedMovie.backdrop != nil {
                 slctdBackdrop = selectedMovie.backdrop!
             }
@@ -166,7 +164,9 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         }
         else
         {
+            //select and pass all the latest movies
             let selectedMovie = nowPlayingMovies[indexPath.row]
+            //handling the backdrop path nil error
              if selectedMovie.backdrop != nil {
             slctdBackdrop = selectedMovie.backdrop!
             }
@@ -178,7 +178,7 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
             slctdMovieTitle = selectedMovie.title
             slctdReleaseDate = selectedMovie.releaseDate
         }
-        
+        // navigate to detail view
         performSegue(withIdentifier: "DetailSegue", sender: self)
         }
     }
@@ -188,9 +188,9 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     {
         if tableView == self.tableViewSuggested
         {
-            return 66.0
+            return 44.0  // set the recent search height
         }
-        return 147.0;//Choose your custom row height
+        return 147.0; //set the Movie List Table height
     }
     
     // display more data
@@ -199,7 +199,7 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         if indexPath.row == self.nowPlayingMovies.count - 1 {
             if !reachedEndofItems
             {
-                 self.loadMore()
+                 self.loadMore() // load more data of the next page when the last element of the current page reached
             }
            
         }
@@ -218,23 +218,52 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         }
         else
         {
+            // when search is active.
             isSearching = true
             guard let query = textField.text?.trimmingCharacters(in: .whitespaces) else
             {
                 fatalError("no query string")
             }
-            // save all search keys into User Defaults
-            UserDefaults.standard.set(txtSearchBar.text, forKey: "searchKey")
-            searchKeyword = txtSearchBar.text!
-            
-            searchedKeyArray.append(searchKeyword)
-            
-                UserDefaults.standard.set(searchedKeyArray, forKey: "searchArrayKey")
-            print("search Keywords Array", searchedKeyArray)
-            
             //Filtering the New Movies According to the Movie Title
             filteredMovies = nowPlayingMovies.filter { $0.title.localizedCaseInsensitiveContains(query) }
             tableView.reloadData()
+            // if there are no previouse search keywords
+            if searchHistoryArray.count == 0
+            {
+            // save all search keys into User Defaults
+            UserDefaults.standard.set(txtSearchBar.text, forKey: "searchKey")
+            // store the search box inputs into the searchKeyword variable
+            searchKeyword = txtSearchBar.text!
+            //append the searched keywords into an array
+            searchedKeyArray.append(searchKeyword)
+            // save the array into userdefaults
+            UserDefaults.standard.set(searchedKeyArray, forKey: "searchArrayKey")
+            print("search Keywords Array", searchedKeyArray)
+            
+            }
+           // if there are no previouse search keywords
+            else
+            {
+                searchHistoryArray.removeAll()
+                // retrieve the previouse searches array
+                searchHistoryArray = UserDefaults.standard.stringArray(forKey: "searchArrayKey") ?? [String]()
+                
+              //  UserDefaults.standard.set(txtSearchBar.text, forKey: "searchKey")
+                searchKeyword = txtSearchBar.text!
+                searchedKeyArray.append(searchKeyword)
+                //join two arrays
+                searchedKeyArray.append(contentsOf: searchHistoryArray)
+               // recentResultsArray = searchHistoryArray + searchedKeyArray
+                print("SHarray\(searchedKeyArray)")
+                // remove the duplicates -- (because of multiple value issue and lack of time)
+                let uniqueValues = Array(Set(searchedKeyArray))
+                //save the array into user defaults
+                UserDefaults.standard.set(uniqueValues, forKey: "searchArrayKey")
+                print("recent results Array", uniqueValues)
+                
+            }
+            
+           
         }
         
         self.resignFirstResponder()
@@ -242,9 +271,12 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         
         return true
     }
+    // when search focus lost
     func searchFocusLost()
     {
         isSearchFocused = false
+       // searchedKeyArray.removeAll()
+        searchHistoryArray.removeAll()
         // Animate the popup search list when hiding
         UIView.animate(withDuration: 0.3, animations: {
             self.popMoviesList.alpha = 0
@@ -262,22 +294,26 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         UIView.animate(withDuration: 0.3, animations: {
             self.popMoviesList.alpha = 1
         }, completion:  nil)
+        // retriving recent array from user defaults
+       searchHistoryArray = UserDefaults.standard.stringArray(forKey: "searchArrayKey") ?? [String]()
+       searchHistoryArray = Array(searchHistoryArray.prefix(10))
+        // sort descending
         
-        searchHistoryArray = UserDefaults.standard.stringArray(forKey: "searchArrayKey") ?? [String]()
-        print("Search History Array:\(searchHistoryArray)")
-            print("Text Field Focused")
+        self.tableViewSuggested.reloadData()
+        
     }
     
     //when search textfield lost focused
     func textFieldDidEndEditing(_ textField: UITextField) {
         
         self.searchFocusLost()
-        print("Text Field Focuse Lost")
+        
     }
   
     //Segue Method
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
+        //perform segue and send data
         if (segue.identifier == "DetailSegue")
         {
             let destination = segue.destination as! MovieDetailVC
@@ -288,6 +324,8 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
             
         }
     }
+    
+   
 }
 
 
