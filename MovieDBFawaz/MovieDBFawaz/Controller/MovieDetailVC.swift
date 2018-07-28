@@ -29,6 +29,7 @@ class MovieDetailVC: UIViewController {
     }
     
     func updateUI(){
+        // backdrop image base image url
         let url = URL(string: "https://image.tmdb.org/t/p/w500\(rcvdBackdrop)")
         let resource = ImageResource(downloadURL: url!)
         backDropImage.kf.setImage(with: resource, placeholder: #imageLiteral(resourceName: "placeholder"), options: [.transition(.fade(0.3))])
@@ -37,10 +38,7 @@ class MovieDetailVC: UIViewController {
         releaseDate.text = "Release Date: \(DF.format(date: rcvdReleaseDate))"
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        
-    }
+  
     
 
    

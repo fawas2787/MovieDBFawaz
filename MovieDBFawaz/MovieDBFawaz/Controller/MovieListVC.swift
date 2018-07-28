@@ -313,7 +313,7 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     //Segue Method
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
-        //perform segue and send data
+        //perform segue and send data to the detail view
         if (segue.identifier == "DetailSegue")
         {
             let destination = segue.destination as! MovieDetailVC
