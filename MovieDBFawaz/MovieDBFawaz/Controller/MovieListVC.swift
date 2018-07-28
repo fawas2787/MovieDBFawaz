@@ -13,8 +13,8 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var txtSearchBar: UITextField!
-    
-    
+    @IBOutlet weak var popMoviesList: UIView!
+   
     var nowPlayingMovies: [Movie] = []
     var suggestedMovies: [Movie]!
     var filteredMovies = [Movie]()
@@ -39,7 +39,7 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         super.viewDidLoad()
         // Start Loading Movie API (Latest Movies) from Any Page you like
         self.getMovies(page: 1)
-        
+        popMoviesList.isHidden = true
         
         
     }
@@ -71,9 +71,7 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
             self.tableView.reloadData()
         })
     }
-  
-    
-   
+
     // *** -- TableView Delegate -- *** \\
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         /*
@@ -196,7 +194,7 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
             searchKeyword = txtSearchBar.text!
             
             searchedKeyArray.append(searchKeyword)
-            UserDefaults.standard.set(searchedKeyArray, forKey: "searchArrayKey")
+                UserDefaults.standard.set(searchedKeyArray, forKey: "searchArrayKey")
             print("search Keywords Array", searchedKeyArray)
             
             //Filtering the New Movies According to the Movie Title
@@ -209,10 +207,27 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         
         return true
     }
+    func searchFocusLost()
+    {
+        isSearchFocused = false
+        // Animate the popup search list when hiding
+        UIView.animate(withDuration: 0.3, animations: {
+            self.popMoviesList.alpha = 0
+        }, completion:  {
+            (value: Bool) in
+            self.popMoviesList.isHidden = true
+        })
+    }
     
     //when search textfield focused
     func textFieldDidBeginEditing(_ textField: UITextField) {
-            isSearchFocused = true
+        isSearchFocused = true
+        // Animate the popup search list when showing
+        self.popMoviesList.isHidden = false
+        UIView.animate(withDuration: 0.3, animations: {
+            self.popMoviesList.alpha = 1
+        }, completion:  nil)
+        
         searchHistoryArray = UserDefaults.standard.stringArray(forKey: "searchArrayKey") ?? [String]()
         print("Search History Array:\(searchHistoryArray)")
             print("Text Field Focused")
@@ -220,8 +235,9 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     
     //when search textfield lost focused
     func textFieldDidEndEditing(_ textField: UITextField) {
-            isSearchFocused = false
-            print("Text Field Focuse Lost")
+        
+        self.searchFocusLost()
+        print("Text Field Focuse Lost")
     }
   
     //Segue Method

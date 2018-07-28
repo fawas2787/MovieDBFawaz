@@ -37,7 +37,6 @@ extension MovieApi: TargetType
         case .newMovies:
             return "now_playing"
         
-        
         }
     }
     
