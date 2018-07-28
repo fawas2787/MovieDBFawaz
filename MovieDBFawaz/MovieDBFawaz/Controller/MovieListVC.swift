@@ -17,12 +17,10 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     @IBOutlet weak var popMoviesList: UIView!
    
     var nowPlayingMovies: [Movie] = []
-    var suggestedMovies: [Movie]!
     var filteredMovies = [Movie]()
     var searchedKeyArray = [String]()
     var searchHistoryArray = [String]()
     var recentResultsArray = [String]()
-    
     var movie: Movie?
     var slctdBackdrop:String = ""
     var slctdMovieTitle:String = ""
@@ -34,6 +32,7 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     var lastPageRetrieved: Int = 0
     var reachedEndofItems = false
     var searchKeyword: String = ""
+    var searchResults:String = ""
     
    
     
