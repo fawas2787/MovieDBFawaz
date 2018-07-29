@@ -6,8 +6,6 @@ target 'MovieDBFawaz' do
   use_frameworks!
 
   # Pods for MovieDBFawaz
-  pod 'SwiftyJSON', '~> 4.0'
-  pod 'Alamofire'
   pod 'Moya', '~> 11.0'
   pod 'Kingfisher', '~> 4.0'
 
