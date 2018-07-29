@@ -678,6 +678,7 @@
 				DEVELOPMENT_TEAM = RWBDE25HP7;
 				INFOPLIST_FILE = "$(SRCROOT)/MovieDBFawaz/Supporting Files/Info.plist";
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -698,6 +699,7 @@
 				DEVELOPMENT_TEAM = RWBDE25HP7;
 				INFOPLIST_FILE = "$(SRCROOT)/MovieDBFawaz/Supporting Files/Info.plist";
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -248,17 +248,25 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
                 searchHistoryArray = UserDefaults.standard.stringArray(forKey: "searchArrayKey") ?? [String]()
                 
               //  UserDefaults.standard.set(txtSearchBar.text, forKey: "searchKey")
-                searchKeyword = txtSearchBar.text!
-                searchedKeyArray.append(searchKeyword)
-                //join two arrays
-                searchedKeyArray.append(contentsOf: searchHistoryArray)
-               // recentResultsArray = searchHistoryArray + searchedKeyArray
-                print("SHarray\(searchedKeyArray)")
-                // remove the duplicates -- (because of multiple value issue and lack of time)
-                let uniqueValues = Array(Set(searchedKeyArray))
-                //save the array into user defaults
-                UserDefaults.standard.set(uniqueValues, forKey: "searchArrayKey")
-                print("recent results Array", uniqueValues)
+                
+                if filteredMovies.count == 0
+                {
+                     print("No Results for the searched keyword")
+                }
+                else
+                {
+                     searchKeyword = txtSearchBar.text!
+                     //appende the search keywords
+                     searchedKeyArray.append(searchKeyword)
+                     //then join both arrays
+                     searchedKeyArray.append(contentsOf: searchHistoryArray)
+               
+                     // remove the duplicates, if any
+                     let uniqueValues = Array(Set(searchedKeyArray))
+                     //save the array into user defaults
+                     UserDefaults.standard.set(uniqueValues, forKey: "searchArrayKey")
+                     print("recent results Array", uniqueValues)
+                }
                 
             }
             
@@ -295,7 +303,8 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         }, completion:  nil)
         // retriving recent array from user defaults
        searchHistoryArray = UserDefaults.standard.stringArray(forKey: "searchArrayKey") ?? [String]()
-       searchHistoryArray = Array(searchHistoryArray.prefix(10))
+        //get the last 10 records from array
+       searchHistoryArray = Array(searchHistoryArray.suffix(10))
         // sort descending
         
         self.tableViewSuggested.reloadData()
