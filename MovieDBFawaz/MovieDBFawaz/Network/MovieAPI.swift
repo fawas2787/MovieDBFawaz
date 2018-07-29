@@ -13,7 +13,7 @@ enum MovieApi
 {
     case suggestedMovies(id:Int)
     case newMovies(page:Int)
-    case results()
+   
 }
 
 extension MovieApi: TargetType
@@ -33,12 +33,10 @@ extension MovieApi: TargetType
     var path: String {
         switch self {
         case .suggestedMovies(let id):
-            return "\(id)/suggestions"
+            return "\(id)/recommendations"
         case .newMovies:
             return "now_playing"
         
-        case .results:
-             return "now_playing"
         }
     }
     
@@ -48,8 +46,7 @@ extension MovieApi: TargetType
         switch self {
         case  .newMovies, .suggestedMovies:
             return .get
-        case .results:
-            return .get
+        
         }
     }
     
@@ -60,8 +57,7 @@ extension MovieApi: TargetType
             return ["api_key": API.apiKey]
         case .newMovies(let page):
             return ["page": page, "api_key": API.apiKey]
-        case .results:
-            return ["api_key": API.apiKey]
+        
         }
     }
     
@@ -70,8 +66,7 @@ extension MovieApi: TargetType
         switch self {
         case .suggestedMovies, .newMovies:
             return URLEncoding.queryString
-        case .results:
-            return URLEncoding.queryString
+       
         }
     }
     
@@ -83,8 +78,7 @@ extension MovieApi: TargetType
             
         case .newMovies(let page):
             return .requestParameters(parameters:  ["page":page, "api_key":API.apiKey], encoding: URLEncoding.queryString)
-        case .results:
-            return .requestPlain
+        
         }
     }
     
