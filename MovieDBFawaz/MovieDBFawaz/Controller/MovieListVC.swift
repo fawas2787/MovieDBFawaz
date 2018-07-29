@@ -229,16 +229,24 @@ class MovieListVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
             // if there are no previouse search keywords
             if searchHistoryArray.count == 0
             {
-            // save all search keys into User Defaults
-            UserDefaults.standard.set(txtSearchBar.text, forKey: "searchKey")
-            // store the search box inputs into the searchKeyword variable
-            searchKeyword = txtSearchBar.text!
-            //append the searched keywords into an array
-            searchedKeyArray.append(searchKeyword)
-            // save the array into userdefaults
-            UserDefaults.standard.set(searchedKeyArray, forKey: "searchArrayKey")
-            print("search Keywords Array", searchedKeyArray)
-            
+                // exclude the searchkeywords when there were no results returned
+                if filteredMovies.count == 0
+                {
+                    print("No Results for the searched keyword")
+                }
+                else
+                {
+                    // save all search keys into User Defaults
+                    UserDefaults.standard.set(txtSearchBar.text, forKey: "searchKey")
+                    // store the search box inputs into the searchKeyword variable
+                    searchKeyword = txtSearchBar.text!
+                    //append the searched keywords into an array
+                    searchedKeyArray.append(searchKeyword)
+                    // save the array into userdefaults
+                    UserDefaults.standard.set(searchedKeyArray, forKey: "searchArrayKey")
+                    print("search Keywords Array", searchedKeyArray)
+                }
+           
             }
            // if there are no previouse search keywords
             else

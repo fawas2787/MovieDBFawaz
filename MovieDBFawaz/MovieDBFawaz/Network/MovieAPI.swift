@@ -13,6 +13,7 @@ enum MovieApi
 {
     case suggestedMovies(id:Int)
     case newMovies(page:Int)
+    
    
 }
 
